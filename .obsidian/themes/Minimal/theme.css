@@ -55,12 +55,12 @@ body {
   --bold-weight: 600;
   --link-weight: inherit;
   --inline-title-margin-bottom: 1rem;
-  --h1-size: 1.125em;
-  --h2-size: 1.05em;
-  --h3-size: 1em;
-  --h4-size: 0.9em;
-  --h5-size: 0.85em;
-  --h6-size: 0.85em;
+  --h1-size: 1.875em;
+  --h2-size: 1.5em;
+  --h3-size: 1.25em;
+  --h4-size: 1em;
+  --h5-size: 0.95em;
+  --h6-size: 0.9em;
   --h1-weight: 600;
   --h2-weight: 600;
   --h3-weight: 500;
@@ -80,8 +80,9 @@ body {
   --h5-style: normal;
   --h6-style: normal;
   --line-width: 40rem;
-  --line-height: 1.5;
+  --line-height: 1.6;
   --line-height-normal: var(--line-height);
+  --line-height-extra: 1.8;
   --max-width: 88%;
   --max-col-width: 18em;
   --icon-muted: 0.5;
@@ -89,7 +90,7 @@ body {
   --folding-offset: 32px;
   --list-edit-offset: 0.5em;
   --list-indent: 2em;
-  --list-spacing: 0.075em;
+  --list-spacing: 0.15em;
   --input-height: 32px;
   --header-height: 40px;
   --metadata-label-width: 9rem;
@@ -100,10 +101,13 @@ body {
   --top-left-padding-y: 0px;
   --image-muted: 0.7;
   --image-radius: 4px;
-  --heading-spacing: 2em;
-  --p-spacing: 1.75rem;
+  --image-margin-y: 1em;
+  --heading-spacing: 1.25em;
+  --p-spacing: 1em;
   --border-width: 1px;
   --table-border-width: var(--border-width);
+  --table-cell-padding-x: 16px;
+  --table-cell-padding-y: 8px;
   --table-selection: var(--text-selection);
   --table-selection-border-color: var(--text-selection);
   --table-selection-border-width: 0px;
@@ -410,7 +414,7 @@ body {
   --font-adaptive-smallest: var(--font-ui-smaller);
   --line-width-wide: calc(var(--line-width) + 12.5%);
   --font-code: calc(var(--font-adaptive-normal) * 0.9);
-  --table-text-size: calc(var(--font-adaptive-normal) * 0.875);
+  --table-text-size: calc(var(--font-adaptive-normal) * 0.9);
 }
 .minimal-dev-block-width .mod-root .workspace-leaf-content:after {
   display: flex;
@@ -529,9 +533,11 @@ body {
 .markdown-source-view.mod-cm6 hr {
   border-width: 2px;
 }
+.cm-lineWrapping {
+  padding-top: 0 !important;
+}
 .mod-cm6 .cm-editor .cm-line {
-  padding-left: 0;
-  padding-right: 0;
+  padding: 2px 0;
 }
 .cm-editor .cm-content {
   padding-top: 0.5em;
@@ -541,6 +547,8 @@ body {
 }
 .markdown-source-view.mod-cm6 .cm-sizer {
   display: block;
+  max-width: 800px;
+  margin: auto;
 }
 .markdown-source-view.mod-cm6 .cm-scroller {
   padding-left: 0;
@@ -682,7 +690,8 @@ figure {
   color: inherit;
 }
 .inline-title {
-  padding-top: 16px;
+  margin: 0 !important;
+  padding: 16px 0;
 }
 .minimal-status-off .status-bar {
   --status-bar-position: static;
@@ -1178,6 +1187,10 @@ body:not(.minimal-strike-lists) {
   left: var(--checkbox-left);
   line-height: 0;
 }
+ul,
+ol {
+  margin-top: 0 !important;
+}
 .markdown-preview-view ul > li.task-list-item {
   text-indent: 0;
 }
@@ -1326,6 +1339,11 @@ a[href*="obsidian://search"]
 {
   background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' width='17' height='17' class='search'><path fill='white' stroke='white' stroke-width='2' d='M42,6C23.2,6,8,21.2,8,40s15.2,34,34,34c7.4,0,14.3-2.4,19.9-6.4l26.3,26.3l5.6-5.6l-26-26.1c5.1-6,8.2-13.7,8.2-22.1 C76,21.2,60.8,6,42,6z M42,10c16.6,0,30,13.4,30,30S58.6,70,42,70S12,56.6,12,40S25.4,10,42,10z'></path></svg>");
 }
+
+.math {
+  line-height: var(--line-height-extra);
+}
+
 div > ol,
 div > ul {
   padding-inline-start: 1.4em;
@@ -1451,17 +1469,18 @@ body {
   mix-blend-mode: multiply;
 }
 body {
-  --table-header-border-width: 0;
-  --table-column-first-border-width: 0;
-  --table-column-last-border-width: 0;
-  --table-row-last-border-width: 0;
-  --table-edge-cell-padding-first: 0;
-  --table-edge-cell-padding-last: 0;
-  --table-cell-padding: 4px 10px;
+  --table-header-border-width: 1px;
+  --table-column-first-border-width: 1px;
+  --table-column-last-border-width: 1px;
+  --table-row-last-border-width: 1px;
+  --table-edge-cell-padding-first: var(--table-cell-padding-x);
+  --table-edge-cell-padding-last: var(--table-cell-padding-x);
+  --table-cell-padding: var(--table-cell-padding-y) var(--table-cell-padding-x);
   --table-header-size: var(--table-text-size);
 }
-.markdown-source-view.mod-cm6 table {
+table {
   border-collapse: collapse;
+  margin: 14px 0 !important;
 }
 .markdown-rendered th {
   --table-header-size: var(--table-text-size);
@@ -1774,6 +1793,11 @@ table.dataview {
   max-width: var(--max-width);
   width: var(--line-width);
   margin-inline: auto;
+}
+
+img {
+  margin: var(--image-margin-y) 0 !important;
+  max-width: 600px !important;
 }
 .img-100,
 .img-max,
@@ -4185,42 +4209,44 @@ body:not(.full-file-names) .tree-item-inner {
   --h5l: var(--ui1);
   --h6l: var(--ui1);
 }
-.h1-l .markdown-reading-view h1:not(.embedded-note-title),
-.h1-l .mod-cm6 .cm-editor .HyperMD-header-1 {
-  border-bottom: 1px solid var(--h1l);
-  padding-bottom: 0.4em;
-  margin-block-end: 0.6em;
+
+.cm-editor .HyperMD-header-1 {
+  padding: 1em 0 0.6em !important;
 }
-.h2-l .markdown-reading-view h2,
-.h2-l .mod-cm6 .cm-editor .HyperMD-header-2 {
-  border-bottom: 1px solid var(--h2l);
-  padding-bottom: 0.4em;
-  margin-block-end: 0.6em;
+.cm-editor .HyperMD-header-2 {
+  padding: 0.8em 0 0.5em !important;
 }
-.h3-l .markdown-reading-view h3,
-.h3-l .mod-cm6 .cm-editor .HyperMD-header-3 {
-  border-bottom: 1px solid var(--h3l);
-  padding-bottom: 0.4em;
-  margin-block-end: 0.6em;
+.cm-editor .HyperMD-header-3 {
+  padding: 0.6em 0 0.4em !important;
 }
-.h4-l .markdown-reading-view h4,
-.h4-l .mod-cm6 .cm-editor .HyperMD-header-4 {
-  border-bottom: 1px solid var(--h4l);
-  padding-bottom: 0.4em;
-  margin-block-end: 0.6em;
+.cm-editor .HyperMD-header-4 {
+  padding: 0.5em 0 0.35em !important;
 }
-.h5-l .markdown-reading-view h5,
-.h5-l .mod-cm6 .cm-editor .HyperMD-header-5 {
-  border-bottom: 1px solid var(--h5l);
-  padding-bottom: 0.4em;
-  margin-block-end: 0.6em;
+.cm-editor .HyperMD-header-5 {
+  padding: 0.4em 0 0.3em !important;
 }
-.h6-l .markdown-reading-view h6,
-.h6-l .mod-cm6 .cm-editor .HyperMD-header-6 {
-  border-bottom: 1px solid var(--h6l);
-  padding-bottom: 0.4em;
-  margin-block-end: 0.6em;
+.cm-editor .HyperMD-header-6 {
+  padding: 0.3em 0 0.25em !important;
 }
+.markdown-reading-view h1 {
+  margin: 1em 0 0.6em !important;
+}
+.markdown-reading-view h2 {
+  margin: 0.8em 0 0.5em !important;
+}
+.markdown-reading-view h3 {
+  margin: 0.6em 0 0.4em !important;
+}
+.markdown-reading-view h4 {
+  margin: 0.5em 0 0.35em !important;
+}
+.markdown-reading-view h5 {
+  margin: 0.4em 0 0.3em !important;
+}
+.markdown-reading-view h6 {
+  margin: 0.3em 0 0.25em !important;
+}
+
 .is-tablet .workspace-drawer {
   padding-top: 0;
 }

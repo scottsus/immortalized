@@ -1,1 +1,10 @@
-{}
+{
+  "promptDelete": false,
+  "spellcheck": false,
+  "newFileLocation": "current",
+  "attachmentFolderPath": "./",
+  "strictLineBreaks": false,
+  "propertiesInDocument": "source",
+  "showLineNumber": false,
+  "readableLineLength": false
+}
